@@ -1,0 +1,18 @@
+<div ng-controller='pimpsController'>
+	<form>
+		<label>Team Name: <input type='text' ng-model='newPimp.t_name'></label>
+		<input type='submit' value='Add Team' ng-click='addPimp()'>
+	</form>
+	<fieldset>
+		<table>
+			<tr>
+				<th><a href="" ng-click="predicate ='n_name'; reverse=!reverse">Team Name</a></th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="late in pimps | orderBy:predicate:reverse">
+				<td>{{late.t_name}}</td>
+				<td><input type='submit' value='Remove Team' ng-click='hatePimp(fakePimp)'></td>
+			</tr>
+		</table>
+	</fieldset>
+</div>

@@ -1,0 +1,30 @@
+<div ng-controller='bloodsController'>
+	<form>
+		<label>Player Name: 
+			<select ng-model='miso'>
+				<option value='{{ fate.n_name }}' ng-repeat='fate in haters'>{{fate.n_name}}</option>
+			</select>
+		</label>
+		<label>Team Name: 
+			<select ng-model='soup'>
+				<option value='{{ late.t_name }}' ng-repeat='late in pimps' >{{late.t_name}}</option>
+			</select>
+		</label>
+		<input type='submit' value='Assign Playa to Team' ng-click='playBind(miso, soup)'>
+	</form>
+	<fieldset>
+		<table>
+			<tr>
+				<th><a href="" ng-click="predicate ='n_name'; reverse=!reverse">Player Name</a></th>
+				<th>Team Name</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat='x in miso' ng-repeat='y in soup' >
+				<td>{{x.miso}}</td>
+				<td>{{y.soup}}</td>
+				<td><input type='submit' value='Clear Assignment' ng-click=''></td>
+			</tr>
+		</table>
+	</fieldset>
+</div>
+<!-- ng-repeat='x in miso' ng-repeat='y in soup' -->

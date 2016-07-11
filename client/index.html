@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html ng-app='playersTeams'>
+<head>
+	<meta charset="utf-8">
+	<title>Playes and Teams</title>
+	<script src="/angular/angular.js"></script>
+	<script src="/angular-route/angular-route.js"></script>
+	<style type="text/css">
+		table { border-spacing: 35px 30px; }
+	</style>
+</head>
+<body>
+	<a href="#/">Players</a> | <a href="#/teams">Teams</a> | <a href="#/Associations">Associations</a>
+	<div ng-view=''>
+	</div>
+
+</body>
+<script type="text/javascript">
+	var allMyThings=angular.module('playersTeams', ['ngRoute']);
+	allMyThings.config(function($routeProvider){
+		$routeProvider
+		.when('/',{
+			templateUrl: '/view1.html'})
+		.when('/teams',{
+			templateUrl:'/view2.html'})
+		.when('/Associations', {
+			templateUrl: '/view3.html'})
+		.otherwise({
+			redirectTo: '/'});
+	});
+
+	allMyThings.factory('spillFactory', function(){
+		var haters=[
+			{n_name:"Erock Go'Git'er"},
+			{n_name:"Weezy FoSheezy"},
+			{n_name:"Squirt McGirt"}];
+		var factory={};
+		factory.getThaHaters=function(callback){
+			callback(haters);
+		}
+		factory.sprinkleHate=function(hater, callback){
+			haters.push(hater);
+			callback(haters);
+		}
+		factory.killHate=function(deer, callback){
+			haters.splice(deer, 1);
+			callback(haters);
+		}
+		return factory;
+
+
+	});
+
+	allMyThings.factory('killFactory', function(){
+		var pimps=[
+			{t_name:"Bee it"},
+			{t_name:"See it"},
+			{t_name:"Feel it"}];
+		var factory={};
+
+		factory.getThaPimps=function(callback){
+			callback(pimps);
+		}
+		factory.sprinklePimp=function(pimp, callback){pimps.push(pimp);
+			callback(pimps);
+		}
+		factory.sprinklePimps=function(playteam, callback){pimps2.push(playteam);
+			callback(pimps2);
+		}
+		factory.killPimp=function(leer, callback){
+			pimps.splice(leer, 1);
+			callback(pimps);
+		}
+		return factory;
+	});
+	allMyThings.controller('hatersController', function(
+		$scope, spillFactory){
+		$scope.haters=[];
+		spillFactory.getThaHaters(function(pdata){
+			$scope.haters = pdata;
+		});
+	$scope.addHater=function(newHater){
+		spillFactory.sprinkleHate($scope.newHater, function(haters){
+			$scope.haters=haters
+		});
+		$scope.newHater={};
+	}
+	$scope.hateHate = function(fakeHate){
+		var deer = $scope.haters.indexOf(fakeHate);
+		spillFactory.killHate(deer, function(haters){
+			$scope.haters=haters;
+		});
+	}
+	});
+	allMyThings.controller('pimpsController', function(
+		$scope, killFactory){
+		$scope.pimps=[];
+		killFactory.getThaPimps(function(tdata){
+			$scope.pimps = tdata;
+		});
+	$scope.addPimp=function(newPimp){
+		killFactory.sprinklePimp($scope.newPimp,
+			function(pimps){
+				$scope.pimps=pimps
+			});
+		$scope.newPimp={};
+	}
+	$scope.hatePimp = function(fakePimp){
+		var leer = $scope.pimps.indexOf(fakePimp);
+		killFactory.killPimp(leer, function(pimps){
+			$scope.pimps=pimps;
+		});
+	}
+	});
+	allMyThings.controller('bloodsController',
+		function( $scope, killFactory, spillFactory){
+			$scope.pimps=[];
+			$scope.haters=[];
+
+
+
+
+			killFactory.getThaPimps(function(tdata){
+				$scope.pimps=tdata;
+			});
+			spillFactory.getThaHaters(function(pdata){
+				$scope.haters=pdata;
+			});
+		$scope.playBind = function(miso, soup){
+			$scope.p_board={n_name:miso, t_name:soup}
+			$scope.haters.push($scope.miso);
+			$scope.haters.push($scope.soup);
+			console.log(miso);
+			console.log(soup);
+			// assoc.push({n_name: miso, t_name: soup},
+			// 	function(assoc){
+			// 		// $scope.pimps2={};
+
+			// });
+			$scope.miso={};
+			$scope.soup={};
+
+
+		}
+		$scope.playClear = function(b){
+			tdata.indexOf(b);
+		}
+
+		})
+
+
+</script>
+</html>
